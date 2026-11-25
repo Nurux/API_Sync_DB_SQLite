@@ -6,8 +6,6 @@ const router = express.Router();
 const { db } = require('../database/db');
 const { randomUUID } = require('crypto');
 
-
-
 //Lista todos os usuarios
 router.get('/todos', (req, res) => {
     const usuarios = db.prepare('SELECT * FROM Usuario').all();
@@ -15,7 +13,7 @@ router.get('/todos', (req, res) => {
     res.json(usuarios);
 });
 
-//Lista o usuario pelo id
+//Lista o usuario pelo id_publico
 router.get('/:publicId', (req, res) => {
     const usuario = db.prepare(`
         SELECT public_id, nome
@@ -32,7 +30,7 @@ router.get('/:publicId', (req, res) => {
     res.json(usuario);
 });
 
-
+//Cadastra usuario
 router.post('/cadastro', async (req, res) => {
     try {
         const user_json = req.body.user;
@@ -74,9 +72,6 @@ router.post('/cadastro', async (req, res) => {
             public_id: publicId,
             resultado: result.lastInsertRowid
         });
-        
-        console.log('Resultado');
-        console.log(result);
 
     } catch (error) {
         console.error(error);
