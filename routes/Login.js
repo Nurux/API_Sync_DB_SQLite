@@ -7,6 +7,7 @@ const { db } = require('../database/db');
 
 const jwt = require('jsonwebtoken');
 
+//Fazer Login
 router.post('/', async (req, res) => {
     const { name, password } = req.body ?? {};
 
